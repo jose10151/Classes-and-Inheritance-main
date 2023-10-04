@@ -7,6 +7,12 @@ class Spaceship {
     let name: String
     var health: Int
     var position: Int
+    
+    init(name: String, health: Int, position: Int){
+        self.name = name
+        self.health = health
+        self.position = position
+    }
 
     func moveLeft() {
         position -= 1
@@ -27,6 +33,13 @@ class Spaceship {
 class Fighter: Spaceship {
     let weapon: String
     var remainingFirePower: Int
+    
+    init(name: String, health: Int, position: Int, weapon: String, remainingFirePower: Int) {
+        
+        self.weapon = weapon
+        self.remainingFirePower = remainingFirePower
+        super.init(name: name, health: health, position: position)
+    }
 
     func fire() {
         if remainingFirePower > 0 {
@@ -39,7 +52,12 @@ class Fighter: Spaceship {
 
 class ShieldedShip: Fighter {
     var shieldStrength: Int
-
+    
+    init(name: String, health: Int, position: Int, weapon: String, remainingFirePower: Int, shieldedStrength: Int) {
+        self.shieldStrength = shieldedStrength
+        super.init(name: name, health: health, position: position, weapon: weapon, remainingFirePower: remainingFirePower)
+    }
+    
     override func wasHit() {
         if shieldStrength > 0 {
             shieldStrength -= 5
